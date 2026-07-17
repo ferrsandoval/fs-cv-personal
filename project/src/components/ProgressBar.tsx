@@ -17,8 +17,8 @@ export function ProgressBar() {
         style={{
           height: "100%",
           width: "0%",
-          background: "linear-gradient(90deg,var(--accent),#5e5ce6)",
-          boxShadow: "0 0 12px rgba(10,132,255,.6)",
+          background: "var(--accent)",
+          boxShadow: "0 0 12px rgba(var(--accent-rgb),.6)",
         }}
       />
     </div>

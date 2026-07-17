@@ -1,0 +1,41 @@
+# === Fernando Sandoval CV — SPA deploy config (Apache / LiteSpeed, e.g. SiteGround) ===
+#
+# If this site lives in a SUBFOLDER instead of the domain root (e.g.
+# https://tudominio.com/cv/ instead of https://tudominio.com/), change
+# RewriteBase below to that subfolder AND set `base` in vite.config.ts to
+# match (e.g. base: '/cv/'), then rebuild.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Let real files/folders (JS, CSS, images, .htaccess itself) be served directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Everything else (client-side routes like /demo/rag) falls back to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Compress text-based assets (Vite serves JS as text/javascript, not the older application/javascript)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Cache hashed build assets aggressively; never cache index.html
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|svg|png|jpg|jpeg|webp|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# Never serve dotfiles (.htaccess, .git, .env, etc.)
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>

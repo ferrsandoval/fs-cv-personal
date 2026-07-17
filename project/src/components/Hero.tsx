@@ -82,7 +82,7 @@ export function Hero() {
           height: 560,
           borderRadius: "50%",
           filter: "blur(75px)",
-          background: "rgba(10,132,255,.4)",
+          background: "rgba(var(--accent-rgb),.4)",
           top: -140,
           left: "50%",
           marginLeft: -280,
@@ -115,7 +115,7 @@ export function Hero() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(340px 340px at var(--mx,50%) var(--my,38%),rgba(10,132,255,.16),transparent 70%)",
+          background: "radial-gradient(340px 340px at var(--mx,50%) var(--my,38%),rgba(var(--accent-rgb),.16),transparent 70%)",
           pointerEvents: "none",
           zIndex: 2,
         }}
@@ -186,7 +186,7 @@ export function Hero() {
               borderRadius: 999,
               background: "var(--accent)",
               color: "#fff",
-              boxShadow: "0 12px 34px -10px rgba(10,132,255,.7)",
+              boxShadow: "0 12px 34px -10px rgba(var(--accent-rgb),.7)",
             }}
           >
             {t("heroCta1")}

@@ -24,7 +24,7 @@ export function Contact() {
           height: 520,
           borderRadius: "50%",
           filter: "blur(80px)",
-          background: "rgba(10,132,255,.28)",
+          background: "rgba(var(--accent-rgb),.28)",
           top: -120,
           left: "50%",
           marginLeft: -260,
@@ -47,7 +47,7 @@ export function Contact() {
               borderRadius: 999,
               background: "var(--accent)",
               color: "#fff",
-              boxShadow: "0 14px 36px -10px rgba(10,132,255,.7)",
+              boxShadow: "0 14px 36px -10px rgba(var(--accent-rgb),.7)",
             }}
           >
             ferrsandoval@gmail.com

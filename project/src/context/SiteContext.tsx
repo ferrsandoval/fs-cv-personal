@@ -15,12 +15,9 @@ interface SiteContextValue {
   theme: Theme;
   lang: Lang;
   sty: Style;
-  openIdx: number | null;
   toggleTheme: () => void;
   toggleLang: () => void;
   cycleStyle: () => void;
-  openProject: (i: number) => void;
-  closeModal: () => void;
   pick: (v: Localized) => string;
   t: (key: keyof typeof L) => string;
   styleLabel: string;
@@ -35,7 +32,6 @@ export function SiteProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
   const [lang, setLang] = useState<Lang>("es");
   const [sty, setSty] = useState<Style>("aurora");
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const toggleTheme = () => setTheme((s) => (s === "dark" ? "light" : "dark"));
   const toggleLang = () => setLang((s) => (s === "es" ? "en" : "es"));
@@ -49,14 +45,6 @@ export function SiteProvider({ children }: { children: ReactNode }) {
     }
     setSty((s) => STYLES[(STYLES.indexOf(s) + 1) % STYLES.length]);
   };
-  const openProject = (i: number) => {
-    setOpenIdx(i);
-    document.body.style.overflow = "hidden";
-  };
-  const closeModal = () => {
-    setOpenIdx(null);
-    document.body.style.overflow = "";
-  };
 
   const pick = (v: Localized) => (typeof v === "string" ? v : v[lang]);
   const t = (key: keyof typeof L) => pick(L[key]);
@@ -66,12 +54,9 @@ export function SiteProvider({ children }: { children: ReactNode }) {
       theme,
       lang,
       sty,
-      openIdx,
       toggleTheme,
       toggleLang,
       cycleStyle,
-      openProject,
-      closeModal,
       pick,
       t,
       styleLabel: STYLE_META[sty][lang],
@@ -80,7 +65,7 @@ export function SiteProvider({ children }: { children: ReactNode }) {
       themeIcon: theme === "dark" ? "☀︎" : "☾",
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [theme, lang, sty, openIdx]
+    [theme, lang, sty]
   );
 
   return <SiteContext.Provider value={value}>{children}</SiteContext.Provider>;

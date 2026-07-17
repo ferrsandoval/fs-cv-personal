@@ -1,14 +1,15 @@
+import { Link } from "react-router-dom";
 import { useSite } from "../context/SiteContext";
 import { PROJ } from "../data/content";
 import { SectionHeader } from "./SectionHeader";
 import type { Project } from "../types";
 
 function ProjCard({ project, idx }: { project: Project; idx: number }) {
-  const { t, pick, openProject } = useSite();
+  const { t, pick } = useSite();
   return (
-    <div
+    <Link
+      to={`/demo/${project.slug}`}
       className="reveal tilt projcard rad-lg bd-blur surface-bg"
-      onClick={() => openProject(idx)}
       style={{
         position: "relative",
         height: "100%",
@@ -23,19 +24,15 @@ function ProjCard({ project, idx }: { project: Project; idx: number }) {
         cursor: "pointer",
         display: "flex",
         flexDirection: "column",
+        color: "var(--text)",
       }}
     >
       <div
         className="cardglow"
         style={{
           position: "absolute",
-          width: 300,
-          height: 300,
-          borderRadius: "50%",
-          filter: "blur(60px)",
-          background: "rgba(10,132,255,.16)",
-          top: "var(--gy,-60%)",
-          left: "var(--gx,-30%)",
+          inset: 0,
+          background: "radial-gradient(220px circle at var(--gx,50%) var(--gy,50%),rgba(var(--accent-rgb),.16),transparent 70%)",
           opacity: 0,
           transition: "opacity .4s",
           pointerEvents: "none",
@@ -90,7 +87,7 @@ function ProjCard({ project, idx }: { project: Project; idx: number }) {
           {t("seeMore")} →
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -1,7 +1,7 @@
 export type Lang = "es" | "en";
 export type Theme = "dark" | "light";
 export type Style = "aurora" | "editorial" | "neon" | "brutal";
-export type ProjectMock = "chat" | "doc" | "list" | "chart" | "terminal" | "grid";
+export type ProjectMock = "chat" | "proposal" | "doc" | "list" | "chart" | "terminal" | "grid";
 
 export type Localized = string | { es: string; en: string };
 
@@ -15,6 +15,7 @@ export interface Job {
 }
 
 export interface Project {
+  slug: string;
   icon: string;
   mock: ProjectMock;
   name: Localized;

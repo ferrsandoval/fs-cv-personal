@@ -96,30 +96,37 @@ export function useTilt(dep?: unknown) {
     const cleanups: Array<() => void> = [];
     cards.forEach((card) => {
       const cg = card.querySelector<HTMLElement>(".cardglow");
+      let rect: DOMRect | null = null;
+      const enter = () => {
+        rect = card.getBoundingClientRect();
+      };
       const move = (e: MouseEvent) => {
-        const r = card.getBoundingClientRect();
+        const r = rect ?? card.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width;
         const py = (e.clientY - r.top) / r.height;
         card.style.transform = `perspective(900px) rotateX(${(0.5 - py) * 8}deg) rotateY(${
           (px - 0.5) * 8
         }deg) translateY(-4px)`;
-        card.style.boxShadow = "0 26px 60px -24px rgba(10,132,255,.4)";
-        card.style.borderColor = "rgba(10,132,255,.4)";
+        card.style.boxShadow = "0 26px 60px -24px rgba(var(--accent-rgb),.4)";
+        card.style.borderColor = "rgba(var(--accent-rgb),.4)";
         if (cg) {
           cg.style.opacity = "1";
-          cg.style.setProperty("--gx", px * 100 - 30 + "%");
-          cg.style.setProperty("--gy", py * 100 - 60 + "%");
+          cg.style.setProperty("--gx", `${e.clientX - r.left}px`);
+          cg.style.setProperty("--gy", `${e.clientY - r.top}px`);
         }
       };
       const leave = () => {
+        rect = null;
         card.style.transform = "";
         card.style.boxShadow = "";
         card.style.borderColor = "";
         if (cg) cg.style.opacity = "0";
       };
+      card.addEventListener("mouseenter", enter);
       card.addEventListener("mousemove", move);
       card.addEventListener("mouseleave", leave);
       cleanups.push(() => {
+        card.removeEventListener("mouseenter", enter);
         card.removeEventListener("mousemove", move);
         card.removeEventListener("mouseleave", leave);
       });

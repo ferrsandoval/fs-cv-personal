@@ -42,8 +42,12 @@ export const L = {
   },
   seeMore: { es: "Ver detalle", en: "View detail" },
   demoLabel: { es: "Vista previa · demo", en: "Preview · demo" },
-  askDemo: { es: "Hablemos de este proyecto →", en: "Let's talk about this project →" },
-  closeWord: { es: "Cerrar", en: "Close" },
+  backToPortfolio: { es: "← Volver al portafolio", en: "← Back to portfolio" },
+  comingSoon: { es: "Demo interactiva en construcción", en: "Interactive demo coming soon" },
+  comingSoonSub: {
+    es: "Esta demo completa todavía no está lista — por ahora te dejamos la vista previa del proyecto.",
+    en: "The full interactive demo isn't ready yet — here's the project preview in the meantime.",
+  },
   skillKicker: { es: "Stack", en: "Stack" },
   skillTitle: { es: "Competencias", en: "Skills" },
   eduKicker: { es: "Formación", en: "Background" },
@@ -112,6 +116,7 @@ export const EXP: Job[] = [
 
 export const PROJ: Project[] = [
   {
+    slug: "rag",
     icon: "💬",
     mock: "chat",
     name: { es: "Asistente de IA para empresas (RAG)", en: "Enterprise AI assistant (RAG)" },
@@ -126,8 +131,9 @@ export const PROJ: Project[] = [
     tags: ["RAG", "LLMs", "Embeddings"],
   },
   {
+    slug: "proposals",
     icon: "📄",
-    mock: "doc",
+    mock: "proposal",
     name: { es: "Generación de propuestas comerciales", en: "Automated commercial proposals" },
     desc: {
       es: "Automatización de cotizaciones y propuestas técnicas con LLMs, reduciendo el tiempo de horas a minutos.",
@@ -140,6 +146,7 @@ export const PROJ: Project[] = [
     tags: ["LLMs", "Automatización", "Business"],
   },
   {
+    slug: "docs",
     icon: "🔎",
     mock: "doc",
     name: { es: "Extracción inteligente de documentos", en: "Intelligent document extraction" },
@@ -154,6 +161,7 @@ export const PROJ: Project[] = [
     tags: ["OCR", "LLMs", "Data Pipelines"],
   },
   {
+    slug: "leads",
     icon: "🎯",
     mock: "list",
     name: { es: "Clasificación automática de leads", en: "Automated lead scoring" },
@@ -168,6 +176,7 @@ export const PROJ: Project[] = [
     tags: ["IA Generativa", "Sales Ops"],
   },
   {
+    slug: "worldcup",
     icon: "⚽",
     mock: "chart",
     name: { es: "World Cup 2026 AI Prediction Engine", en: "World Cup 2026 AI Prediction Engine" },
@@ -182,6 +191,7 @@ export const PROJ: Project[] = [
     tags: ["Statistical Modeling", "Python", "Monte Carlo"],
   },
   {
+    slug: "llm-infra",
     icon: "🖥️",
     mock: "terminal",
     name: { es: "Private LLM Infrastructure", en: "Private LLM Infrastructure" },
@@ -196,6 +206,7 @@ export const PROJ: Project[] = [
     tags: ["Ollama", "Local AI", "Privacy"],
   },
   {
+    slug: "ainsa",
     icon: "🏭",
     mock: "grid",
     name: { es: "AINSA OneWorks Industrial Platform", en: "AINSA OneWorks Industrial Platform" },
